@@ -34,7 +34,6 @@ def query_gpt4(prompt):
 
     client = OpenAI(api_key=get_api_key())
 
-
     try:
         response = client.chat.completions.create(model="gpt-4o",
         messages=[
