@@ -42,13 +42,6 @@ lsof -i :9002 | awk 'NR>1 {print $2}' | xargs kill -9
 └─ ls + of = "list open files"
 ```
 
-The tool will return an explanation of how to perform the task in a UNIX system.
-
-You can also use the explicit query command:
-
-```
-explaincmd query your command here
-```
 
 ## Development
 
