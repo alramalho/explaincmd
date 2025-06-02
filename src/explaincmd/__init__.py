@@ -38,10 +38,10 @@ def query_gpt4(prompt):
     try:
         response = client.chat.completions.create(model="gpt-4o",
         messages=[
-            {"role": "system", "content": "You are a silent assitant that just outputs UNIX cli commands"},
-            {"role": "user", "content": f"explain command lsof -i :9002 | awk 'NR>1 {print $2}' | xargs kill -9"},
+            {"role": "system", "content": "You are a silent assitant that just outputs minimal ASCII explanations. Nothign more."},
+            {"role": "user", "content": "explain command lsof -i :3412 | awk 'NR>1 {print $2}' | xargs kill -9"},
             {"role": "assistant", "content": (
-                "lsof -i :9002 | awk 'NR>1 {print $2}' | xargs kill -9\n"
+                "lsof -i :3412 | awk 'NR>1 {print $2}' | xargs kill -9\n"
                 "│    │         │     │                │       │\n"
                 "│    │         │     │                │       └─ signal 9 (SIGKILL - no mercy)\n"
                 "│    │         │     │                └─ x = execute, args = arguments\n" 
@@ -63,7 +63,7 @@ def query_gpt4(prompt):
 def main():
     parser = argparse.ArgumentParser(description="Get UNIX commands from text explanations using AI")
     parser.add_argument('--setup', metavar='API_KEY', help='Setup OpenAI API key')
-    parser.add_argument('query', nargs='*', help='The task description to get a UNIX command for')
+    parser.add_argument('query', nargs=argparse.REMAINDER, help='The task description to get a UNIX command for (everything after --setup will be treated as the query)')
     args = parser.parse_args()
 
     if args.setup:
